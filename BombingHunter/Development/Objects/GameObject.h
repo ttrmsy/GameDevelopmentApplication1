@@ -2,7 +2,8 @@
 
 #define PlayerObject (0)
 #define BomObject (1)
-#define EnemyBullet (2)
+#define EnemyObject (2)
+#define EnemyBullet (3)
 
 #include "../Utility/Vector2D.h"
 

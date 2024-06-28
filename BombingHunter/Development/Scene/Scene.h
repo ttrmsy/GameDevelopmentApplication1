@@ -18,8 +18,10 @@ public:
 	void Update();
 	void Draw() const;
 	void Finalize();
+	bool GetBomCount();
 	int time;
 	int flame_count;
+	bool bom_count;
 
 private:
 	//当たり判定チェック処理

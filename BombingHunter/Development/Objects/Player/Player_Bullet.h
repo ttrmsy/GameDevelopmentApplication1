@@ -7,6 +7,8 @@ private:
 	int animation;
 	Vector2D velocity;    //進行情報取得
 	int image;
+	bool IsHit;
+	bool bom_count;
 
 public:
 	Player_Bullet();
@@ -17,8 +19,10 @@ public:
 	virtual void Draw() const override;  //描画処理
 	virtual void Finalize() override;   //終了時処理
 
+	//当たり判定通知処理
+	virtual void OnHitCollision(GameObject* hit_object)override;
 
-
+	virtual bool DeleteCheck() override;
 
 private:
 

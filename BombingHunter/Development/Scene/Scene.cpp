@@ -10,7 +10,7 @@
 
 
 //コンストラクタ
-Scene::Scene() :objects(),time(0),stage(),flame_count(0)
+Scene::Scene() :objects(),time(0),stage(),flame_count(0),bom_count(true)
 {
 
 }
@@ -34,6 +34,8 @@ void Scene::Initialize()
 
 	time = 60;
 
+
+
 }
 
 //更新処理
@@ -47,10 +49,15 @@ void Scene::Update()
 	}
 	
 	//zキーを押したら、ボムを生成する
-	if (InputControl::GetKeyDown(KEY_INPUT_Z))
+	if (InputControl::GetKeyDown(KEY_INPUT_SPACE))
 	{
 
-		CreateObject<Player_Bullet>(objects.at(0)->GetLocation());
+			if (GetBomCount() == true)
+			{
+				bom_count = false;
+			CreateObject<Player_Bullet>(objects.at(0)->GetLocation());
+
+			}
 	}
 
 	//オブジェクト同士の当たり判定チェック
@@ -65,6 +72,7 @@ void Scene::Update()
 		}
 
 	}
+
 	//オブジェクト判定チェック
 	for (int i = 0; i < objects.size(); i++)
 	{
@@ -80,11 +88,26 @@ void Scene::Update()
 		//判定チェック処理
 		if (objects[i]->DeleteCheck() == TRUE)
 		{
+
+ 			if (objects[i]->GetType() == BomObject)
+			{
+				bom_count = true;
+			}
+
 			objects.erase(objects.begin() + i);
+
+			
 		}
 	}
 
 	FlameControl();
+
+}
+
+//ボムカウント
+bool Scene::GetBomCount()
+{
+	return bom_count;
 
 }
 

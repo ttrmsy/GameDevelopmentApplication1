@@ -6,7 +6,9 @@ GameObject::GameObject() :
 	scale(0.0),
 	radian(0.0),
 	image(0),
-	sound(0)
+	sound(0),
+	object_type(),
+	object()
 {
 
 }
@@ -60,6 +62,7 @@ int GameObject::GetType()
 
 
 }
+
 
 //ˆÊ’uî•ñæ“¾ˆ—
 Vector2D GameObject::GetLocation() const

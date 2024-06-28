@@ -30,6 +30,7 @@ Enemy::~Enemy()
 //‰Šú‰»ˆ—
 void Enemy::Initialize()
 {
+	object = EnemyObject;
 	
 	int rand_count = GetRand(100);
 

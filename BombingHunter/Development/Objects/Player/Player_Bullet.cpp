@@ -2,7 +2,7 @@
 #include"DxLib.h"
 
 
-Player_Bullet::Player_Bullet() : image()
+Player_Bullet::Player_Bullet() : image(),IsHit()
 {
 	animation = LoadGraph("Resource/images/Bomb/Bomb.png");
 }
@@ -32,6 +32,28 @@ void Player_Bullet::Update()
 void Player_Bullet::Movement()
 {
 	location.y += velocity.y;
+}
+
+//“–‚½‚è”»’è’Ê’mˆ—
+void Player_Bullet::OnHitCollision(GameObject* hit_object)
+{
+	if (hit_object->GetType() == EnemyObject)
+	{
+		//“–‚½‚Á‚½Žž‚Ìˆ—
+		location = 0.0f;
+		IsHit = TRUE;
+	}
+}
+
+bool Player_Bullet::DeleteCheck()
+{
+	bool ret = FALSE;
+	if (location.y > 640.0f + box_size.x || IsHit == TRUE)
+	{
+		ret = TRUE;
+	}
+
+	return ret;
 }
 
 void Player_Bullet::Draw() const
