@@ -7,8 +7,9 @@ private:
 	int animation;
 	Vector2D velocity;    //isî•ñæ“¾
 	int image;
+	int sound[2];
 	bool IsHit;
-	bool bom_count;
+
 
 public:
 	Player_Bullet();

@@ -18,6 +18,7 @@ private:
 	Vector2D velocity;    //isî•ñæ“¾
 	int enemy_type[4];
 	bool IsHit;
+	int sound[2];
 
 public:
 	Enemy();

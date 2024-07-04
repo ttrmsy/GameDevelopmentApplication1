@@ -2,9 +2,16 @@
 #include"DxLib.h"
 
 
-Player_Bullet::Player_Bullet() : image(),IsHit()
+Player_Bullet::Player_Bullet() : image(),IsHit(),sound()
 {
+	for (int i = 0; i < 2; i++)
+	{
+		sound[i] = NULL;
+	}
+
 	animation = LoadGraph("Resource/images/Bomb/Bomb.png");
+	sound[0] = LoadSoundMem("Resource/Sounds/pan.wav");
+	sound[1] = LoadSoundMem("Resource/Sounds/pokan.wav");
 }
 
 
@@ -18,9 +25,12 @@ void Player_Bullet::Initialize()
 	velocity.y += 2.0;
 	image = animation;
 
-	radian = 4.7f;
+	radian = -1.6f;
 
 	object = BomObject;
+
+
+	PlaySoundMem(sound[0], DX_PLAYTYPE_BACK);
 }
 
 void Player_Bullet::Update()
@@ -42,6 +52,8 @@ void Player_Bullet::OnHitCollision(GameObject* hit_object)
 		//“–‚½‚Á‚½Žž‚Ìˆ—
 		location = 0.0f;
 		IsHit = TRUE;
+		PlaySoundMem(sound[1], DX_PLAYTYPE_BACK);
+
 	}
 }
 

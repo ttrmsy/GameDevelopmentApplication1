@@ -17,6 +17,10 @@ Enemy::Enemy() :animation_count(0), flip_flag(FALSE),IsHit(FALSE)
 		enemy_type[i] = 5;
 	}
 
+	for (int i = 0; i < 2; i++)
+	{
+		sound[i] = NULL;
+	}
 }
 
 //デストラクタ
@@ -31,7 +35,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	object = EnemyObject;
-	
+
 	int rand_count = GetRand(100);
 
 	if (rand_count <= 50)
@@ -111,6 +115,8 @@ void Enemy::Initialize()
 
 				animation[2] = LoadGraph("Resource/Images/WingEnemy/1.png");
 				animation[3] = LoadGraph("Resource/Images/WingEnemy/2.png");
+				sound[0] = LoadSoundMem("Resource/Sounds/Evaluation/teki_gahee.wav");
+				PlaySoundMem(sound[0], DX_PLAYTYPE_BACK);
 
 				enemy_type[HANE]--;
 
@@ -182,6 +188,7 @@ void Enemy::Initialize()
 						velocity.x = 5.0f;
 					}
 				}
+
 				//初期画像の設定
 				image = animation[2];
 				break;
@@ -190,6 +197,8 @@ void Enemy::Initialize()
 
 				animation[4] = LoadGraph("Resource/Images/BoxEnemy/1.png");
 				animation[5] = LoadGraph("Resource/Images/BoxEnemy/2.png");
+				sound[1] = LoadSoundMem("Resource/Sounds/Evaluation/Boss_gahee.wav");
+
 
 				enemy_type[HAKO]--;
 				location.y = 600;
@@ -224,8 +233,6 @@ void Enemy::Initialize()
 				//初期画像の設定
 				image = animation[4];
 				break;
-
-				object = HAKO;
 
 			case GOLD:
 

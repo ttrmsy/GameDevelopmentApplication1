@@ -22,6 +22,7 @@ public:
 	int time;
 	int flame_count;
 	bool bom_count;
+	int sound;
 
 private:
 	//当たり判定チェック処理

@@ -12,7 +12,8 @@
 //コンストラクタ
 Scene::Scene() :objects(),time(0),stage(),flame_count(0),bom_count(true)
 {
-
+	stage = LoadGraph("Resource/images/BackGround.png");
+	sound = LoadSoundMem("Resource/Sounds/Evaluation/BGM_arrows.wav");
 }
 
 //デストラクタ
@@ -29,19 +30,16 @@ void Scene::Initialize()
 {
 	//プレイヤーを生成する
 	CreateObject<Player>(Vector2D(320.0f, 120.0f));
-		 
-	stage = LoadGraph("Resource/images/BackGround.png");
 
 	time = 60;
 
-
-
+	PlaySoundMem(sound, DX_PLAYTYPE_LOOP);
 }
 
 //更新処理
 void Scene::Update()
 {
-
+	
 	//シーンに存在するオブジェクトの更新処理
 	for (GameObject* obj : objects)
 	{
@@ -88,21 +86,19 @@ void Scene::Update()
 		//判定チェック処理
 		if (objects[i]->DeleteCheck() == TRUE)
 		{
-
- 			if (objects[i]->GetType() == BomObject)
+			if (objects[i]->GetType() == BomObject)
 			{
 				bom_count = true;
 			}
-
 			objects.erase(objects.begin() + i);
-
-			
 		}
 	}
 
 	FlameControl();
 
+
 }
+
 
 //ボムカウント
 bool Scene::GetBomCount()
@@ -127,11 +123,7 @@ void Scene::FlameControl()
 		time -= 1;
 
 		CreateObject<Enemy>(Vector2D(32.0f, 540.0f));
-		
-		if (GetType() == HAKO)
-		{
-			CreateObject<Enemy_Bullet>(Vector2D(objects.at(HAKO)->GetLocation()));
-		}
+	
 	}
 }
 
